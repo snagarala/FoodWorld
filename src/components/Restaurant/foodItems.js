@@ -1,0 +1,225 @@
+let foodItems = {
+  "Appetizers | cold": [
+    {
+      id: 1,
+      category: "Appetizers-Cold",
+      name: "Hummus & Pita Bread",
+      description:
+        "Creamy with touch of olive oil, lemon juice,garlic,tahini,spices.",
+      price: "9.95",
+      image: "hummus.jpg",
+    },
+    {
+      id: 2,
+      category: "Appetizers-Cold",
+      name: "Stuffed Grape Leaves",
+      description: "Grape leaves Stuffed with rice,tomatoes,and olive oil.",
+      price: "11.00",
+      image: "grapeleaves.png",
+    },
+    {
+      id: 3,
+      category: "Appetizers-Cold",
+      name: "Baba Ganoush & Pita Bread",
+      description:
+        "Home made rice & creamy Grilled Eggplant,Home made rice & creamy Grilled Eggplant.",
+      price: "9.95",
+      image: "bread.jpg",
+    },
+  ],
+  "Appetizers | hot": [
+    {
+      id: 4,
+      category: "Appetizers-Hot",
+      name: "Shrimp",
+      description: "Crispy with sweet & spice chili sauce.",
+      price: "12.50",
+      image: "shrimp.jpg",
+    },
+    {
+      id: 5,
+      category: "Appetizers-Hot",
+      name: "Onion Rings",
+      description: "With marinara sauce.",
+      price: "16.00",
+      image: "onionRings.jpg",
+    },
+    {
+      id: 6,
+      category: "Appetizers-Hot",
+      name: "French Fries",
+      description: "Crispy Fried ones.",
+      price: "10.00",
+      image: "frenchFries.jpg",
+    },
+    {
+      id: 7,
+      category: "Appetizers-Hot",
+      name: "Falafel.",
+      description: "Crispy Fried ones.",
+      price: "15.00",
+      image: "falafel.jpg",
+    },
+  ],
+  "Soup of the day": [
+    {
+      id: 8,
+      category: "Soup of The Day",
+      name: "Lentil Soup",
+      description: "All fresh,nothing from a can.seasoning & herbs.",
+      price: "7.50",
+      image: "lentilSoup.jpg",
+    },
+    {
+      id: 9,
+      category: "Soup of The Day",
+      name: "Tomato Soup",
+      description: "All fresh,nothing from a can.seasoning & herbs.",
+      price: "8.00",
+      image: "tomatoSoup.jpg",
+    },
+    {
+      id: 10,
+      category: "Soup of The Day",
+      name: "Mushroom Soup",
+      description: "All fresh,nothing from a can.seasoning & herbs.",
+      price: "12.00",
+      image: "mushroomSoup.jpg",
+    },
+  ],
+  "Salads": [
+    {
+      id: 11,
+      category: "Salads",
+      name: "House Salad",
+      description: "Fresh mixed vegetables with fresh herbs and cheese.",
+      price: "15.00",
+      image: "houseSalad.jpg",
+    },
+    {
+      id: 12,
+      category: "Salads",
+      name: "Beans Salad",
+      description: "Fresh mixed Beans with fresh herbs and cheese.",
+      price: "13.00",
+      image: "beansSalad.jpg",
+    },
+  ],
+  "Sandwiches": [
+    {
+      id: 13,
+      category: "Sandwiches",
+      name: "Grilled Chicken Sandwich",
+      description: "Fresh cooked chicken with vegetables and cream.",
+      price: "18.00",
+      image: "chickenSandwich.jpg",
+    },
+    {
+      id: 14,
+      category: "Sandwiches",
+      name: "Egg Sandwich",
+      description: "Fresh cooked Eggs with herbs and cream.",
+      price: "14.00",
+      image: "eggSandwich.jpg",
+    },
+    {
+      id: 15,
+      category: "Sandwiches",
+      name: "Veg Sandwich",
+      description: "Fresh garden grown vegetables with mixed herbs and cream.",
+      price: "10.99",
+      image: "vegSandwich.jpg",
+    },
+    {
+      id: 16,
+      category: "Sandwiches",
+      name: "Avocado Sandwich",
+      description: "Fresh organic Avocados with mixed herbs and cream.",
+      price: "6.00",
+      image: "avocadoSandwich.jpg",
+    },
+  ],
+  "Coffee": [
+    {
+      id: 17,
+      category: "Coffee",
+      name: "Hot Coffee",
+      description: "Hot Home Style Coffee",
+      price: "6.00",
+      image: "hotCoffee.jpg",
+    },
+  ],
+};
+let kidsMenu = {
+    "Desserts": [
+  {
+    id: 1,
+    category: "Desserts",
+    name: "Chocolate mousse Cake",
+    description:
+      "Rich Chocolate cake with a dense,fudgy base,topped with chocolate cream.",
+    price: "8.50",
+    image: "chocolateCake.jpg",
+  },
+  {
+    id: 2,
+    category: "Desserts",
+    name: "CheeseCake",
+    description: "Creamy CheeseCake slice with fresh fruits.",
+    price: "10.00",
+    image: "cheeseCake.jpg",
+  },
+  {
+    id: 3,
+    category: "Desserts",
+    name: "Strawberry Cake",
+    description: "Fresh strawberries with cream.",
+    price: "20.00",
+    image: "StrawberryCake.jpg",
+  }],
+  "Pizza":[
+  {
+    id: 4,
+    category: "Pizza",
+    name: "Mini Cheese Pizza",
+    description: "Kid's mini cheese pizza.",
+    price: "12.00",
+    image: "cheesePizza.jpg",
+  },
+  {
+    id: 5,
+    category: "Pizza",
+    name: "Veg Pizza",
+    description: "Fresh vegetables with cheese.",
+    price: "10.00",
+    image: "vegPizza.jpg",
+  },
+  {
+    id: 6,
+    category: "Pizza",
+    name: "Chicken Pizza",
+    description: "Fresh chicken with cheese.",
+    price: "14.99",
+    image: "chickenPizza.jpg",
+  }],
+  "Cold Coffee":[
+  {
+    id: 7,
+    category: "Cold Coffee",
+    name: "Cold Coffee",
+    description: "Cold Coffee with cream and chocolate chips.",
+    price: "18.00",
+    image: "coldCoffee.jpg",
+  }],
+  "IceCreams":[
+  {
+    id: 8,
+    category: "IceCreams",
+    name: "IceCreams",
+    description: "All type of IceCream Flavours.",
+    price: "10.00",
+    image: "iceCreams.jpg",
+  }],
+};
+
+export { foodItems, kidsMenu };
