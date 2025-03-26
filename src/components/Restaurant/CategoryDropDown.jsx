@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
-import { MdKeyboardArrowDown } from "react-icons/md";
 
-export default function CategoryDropDown({title,values,selectedCategory,setSelectedCategory,setOpen}) {
-
-// const [ selectedOption,setSelectedOption ] = useState(values[0]);
+export default function CategoryDropDown({values,selectedCategory,setSelectedCategory,setOpen}) {
 
   return (
     <div className="absolute border left-5 z-10 bg-white w-[300px] mt-9 pb-3 shadow-2xl rounded-lg hover:h-auto overflow-hidden ">

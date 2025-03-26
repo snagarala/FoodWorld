@@ -153,7 +153,7 @@ let foodItems = {
 let kidsMenu = {
     "Desserts": [
   {
-    id: 1,
+    id: 18,
     category: "Desserts",
     name: "Chocolate mousse Cake",
     description:
@@ -162,7 +162,7 @@ let kidsMenu = {
     image: "chocolateCake.jpg",
   },
   {
-    id: 2,
+    id: 19,
     category: "Desserts",
     name: "CheeseCake",
     description: "Creamy CheeseCake slice with fresh fruits.",
@@ -170,7 +170,7 @@ let kidsMenu = {
     image: "cheeseCake.jpg",
   },
   {
-    id: 3,
+    id: 20,
     category: "Desserts",
     name: "Strawberry Cake",
     description: "Fresh strawberries with cream.",
@@ -179,7 +179,7 @@ let kidsMenu = {
   }],
   "Pizza":[
   {
-    id: 4,
+    id: 21,
     category: "Pizza",
     name: "Mini Cheese Pizza",
     description: "Kid's mini cheese pizza.",
@@ -187,7 +187,7 @@ let kidsMenu = {
     image: "cheesePizza.jpg",
   },
   {
-    id: 5,
+    id: 22,
     category: "Pizza",
     name: "Veg Pizza",
     description: "Fresh vegetables with cheese.",
@@ -195,7 +195,7 @@ let kidsMenu = {
     image: "vegPizza.jpg",
   },
   {
-    id: 6,
+    id: 23,
     category: "Pizza",
     name: "Chicken Pizza",
     description: "Fresh chicken with cheese.",
@@ -204,7 +204,7 @@ let kidsMenu = {
   }],
   "Cold Coffee":[
   {
-    id: 7,
+    id: 24,
     category: "Cold Coffee",
     name: "Cold Coffee",
     description: "Cold Coffee with cream and chocolate chips.",
@@ -213,7 +213,7 @@ let kidsMenu = {
   }],
   "IceCreams":[
   {
-    id: 8,
+    id: 25,
     category: "IceCreams",
     name: "IceCreams",
     description: "All type of IceCream Flavours.",

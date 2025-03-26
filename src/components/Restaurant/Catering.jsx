@@ -82,7 +82,7 @@ export default function Catering() {
          </div>
       </div>
 
-      <div className='flex mt-[250px] justify-end pr-[40px] mb-[50px]'>
+      <div className='flex mt-[250px] justify-end pr-[40px] mb-[180px]'>
          <FaSquareInstagram  size={60}  className="text-pink-800 ml-[80px]"/>
          <FaFacebook size={60}  className="text-[#3D5999] ml-[20px]"/>
       </div>

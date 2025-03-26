@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
 
   const navigate = useNavigate();
+  
   const [isHandBurger, setIsHandBurger] = useState(false);
 
   function onClose() {
@@ -13,10 +14,10 @@ export default function Navbar() {
   }
   return (
     <nav className="sticky top-0 z-50 w-[95%]  bg-white pt-[50px] mx-auto">
-      <div className="wrapper flex justify-between w-full h-[40rem]">
+      <div className="wrapper relative flex justify-between w-full h-[40rem]">
         <div onClick={() => {
-            navigate("/foodHome");
-          }} className=" mt-[20px] ml-[20px] ">
+            navigate("/");
+          }} className=" mt-[20px] ml-[20px] cursor-pointer">
           <h1 className="text-green-900 font-semibold text-[150px] font-['bentham'] leading-1">
             Gardenia
           </h1>
@@ -38,7 +39,11 @@ export default function Navbar() {
          opacity-75 text-start">
         An Authentic Mediterranean Dining Experience.
       </h2>
-      <div className="model relative">{isHandBurger && <HandBurgerMenu onClose={onClose} />}</div>
+      <div className="model ">
+        {isHandBurger && 
+        <HandBurgerMenu onClose={onClose} />
+        }
+        </div>
     </nav>
   );
 }

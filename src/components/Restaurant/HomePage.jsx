@@ -33,45 +33,89 @@ export default function HomePage() {
                  Now Offering <br /> Catering
            </p>   
       </div>
-      <div className="secondSection ">
+      <div className="secondSection relative">
           <div className="flex">
-                <img src="https://static.wixstatic.com/media/7a07d6_6c825c62ecc4475dac3dee0f50b3b714~mv2.jpg/v1/fill/w_505,h_560,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/7a07d6_6c825c62ecc4475dac3dee0f50b3b714~mv2.jpg"  alt="foodImg"/>
-              <div className="flex flex-col items-center justify-center gap-5 px-5 text-center">
-                   <p className="uppercase text-[#624D16] font-['libre_caslon_display'] font-bold text-[30px]">
-                     Authentic Mediterranean dining 
+                <img src="https://static.wixstatic.com/media/7a07d6_6c825c62ecc4475dac3dee0f50b3b714~mv2.jpg/v1/fill/w_505,h_560,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/7a07d6_6c825c62ecc4475dac3dee0f50b3b714~mv2.jpg"  alt="foodImg"
+                className="w-[485px]"/>
+              <div className="flex flex-col items-center justify-center gap-5  text-start">
+                   <p className="px-1 uppercase text-[#624D16] font-['libre_caslon_display'] font-bold text-[30px]">
+                     Authentic Mediterranean <br/>dining 
                    </p>
-                   <p className="font-thin font-serif text-[#624D16]">
+                   <p className="font-thin font-serif text-[#624D16] pl-2">
                      Come dine with us in a casual
                       ,family-friendly settings with authentic Mediterranean food.
                      </p>
-                  <button className="bg-[#624D16] text-white cursor-pointer px-5 py-2 rounded-full 
+                  <button className="bg-[#624D16] text-white cursor-pointer px-5 py-2 rounded-full mr-[300px]
                        hover:bg-yellow-700 hover:border-yellow-800 border"
                       >About Us
                   </button>
               </div>
           </div>
-          <div className="flex items-center text-start">
+          <div className="flex items-center text-start w-8 h-[450px] pr-[150px]">
             <p className=" text-green-900 font-['libre_caslon_display'] font-bold text-[45px] p-2">
                 "Every plate is a masterpiece,fresh and flavorful"
             </p>
-            <div className="w-[1000px] pr-[150px]">
-              <img className=""
+            
+          </div>
+          <div className="absolute top-[450px] left-[380px] w-[1000px] pr-[150px]">
+              <img className="h-[550px]"
                 src="https://static.wixstatic.com/media/7a07d6_120defe0ecab4aa98d55feb8862f1169~mv2.jpg/v1/fill/w_355,h_533,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/GardeniaMediterranianRestaurant40_JPG.jpg" alt="foodImg" />
             </div>
-          </div>
-          <div className="bg-[#F6F6EE]">
-             <div className="grid grid-cols-2 row-span-2 p-6 mt-[50px] gap-2">
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_0b09ac7daa2c43e88d114f1436c8db13~mv2.jpg/v1/fill/w_419,h_281,q_90,enc_avif,quality_auto/7a07d6_0b09ac7daa2c43e88d114f1436c8db13~mv2.jpg" alt="food" className="" /></div>
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_692f9e2dca204e11b2620abff4e39e1e~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_692f9e2dca204e11b2620abff4e39e1e~mv2.jpg" alt="food" className="" /></div>
-                  <div className="col-span-2 p-5"><img src="https://static.wixstatic.com/media/7a07d6_cd41b8a7d5c4427b96c7b58fad784423~mv2.jpg/v1/fill/w_864,h_579,q_90,enc_avif,quality_auto/7a07d6_cd41b8a7d5c4427b96c7b58fad784423~mv2.jpg" alt="food" /></div>
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_120defe0ecab4aa98d55feb8862f1169~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_120defe0ecab4aa98d55feb8862f1169~mv2.jpg" alt="food" className="" /></div>
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_eab243ff9abb48e0bfe85b0cddb7639b~mv2.jpg/v1/fill/w_864,h_580,q_90,enc_avif,quality_auto/7a07d6_eab243ff9abb48e0bfe85b0cddb7639b~mv2.jpg" alt="food" className="" /></div>
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_1190ed273a08467dae2b24300d3a6252~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_1190ed273a08467dae2b24300d3a6252~mv2.jpg" alt="food" /></div>
-                  <div className="col-span-2 p-5"><img src="https://static.wixstatic.com/media/7a07d6_31beac9edc654c75a47eb0b3fb8fcbb9~mv2.jpg/v1/fill/w_864,h_579,q_90,enc_avif,quality_auto/7a07d6_31beac9edc654c75a47eb0b3fb8fcbb9~mv2.jpg" alt="food" /></div>
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_8ea596a2fb2f47fa94599607f6e21457~mv2.jpg/v1/fill/w_419,h_281,q_90,enc_avif,quality_auto/7a07d6_8ea596a2fb2f47fa94599607f6e21457~mv2.jpg" alt="food" /></div>
-                  <div><img src="https://static.wixstatic.com/media/7a07d6_f6fb2547e6114826b2891536d276be75~mv2.jpg/v1/fill/w_421,h_281,q_90,enc_avif,quality_auto/7a07d6_f6fb2547e6114826b2891536d276be75~mv2.jpg" alt="food" /></div>
-             </div>
-             <div className="pb-[90px] p-5 flex justify-between">
+          <div className="images bg-[#F6F6EE] mt-4 ">  
+              <div className="firstGrid grid grid-cols-4 grid-rows-9 gap-5 pt-5 px-5">
+                  <div className="col-span-2 row-span-3">
+                    <img src="https://static.wixstatic.com/media/7a07d6_0b09ac7daa2c43e88d114f1436c8db13~mv2.jpg/v1/fill/w_419,h_281,q_90,enc_avif,quality_auto/7a07d6_0b09ac7daa2c43e88d114f1436c8db13~mv2.jpg" alt="food" 
+                        className="h-[300px]" />
+                  </div>
+                  <div className="col-span-2 row-span-3 col-start-3">
+                     <img src="https://static.wixstatic.com/media/7a07d6_692f9e2dca204e11b2620abff4e39e1e~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_692f9e2dca204e11b2620abff4e39e1e~mv2.jpg" alt="food" 
+                          className="" />
+                  </div>
+                  <div className="col-span-4 row-span-6 row-start-4">
+                    <img src="https://static.wixstatic.com/media/7a07d6_cd41b8a7d5c4427b96c7b58fad784423~mv2.jpg/v1/fill/w_864,h_579,q_90,enc_avif,quality_auto/7a07d6_cd41b8a7d5c4427b96c7b58fad784423~mv2.jpg" alt="food" 
+                         className="w-[970px]" />
+                  </div>
+              </div>     
+              <div className="secondGrid grid grid-cols-7 grid-rows-6 gap-5 pt-5 px-5">
+                  <div className="col-span-3 row-span-3 ">
+                      <img src="https://static.wixstatic.com/media/7a07d6_90ea5a2f16904853949f52c555ae98f2~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_90ea5a2f16904853949f52c555ae98f2~mv2.jpg" alt="foodImg" 
+                           className="" />
+                  </div>
+                  <div className="col-span-3 row-span-3 col-start-1 row-start-4">
+                       <img src="https://static.wixstatic.com/media/7a07d6_51352c3acaab4fad8c18224d9a6b3cab~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_51352c3acaab4fad8c18224d9a6b3cab~mv2.jpg"  alt="foodImg" 
+                            className="" />
+                  </div>
+                  <div className="col-span-4 row-span-4 col-start-4 row-start-1">
+                        <img src="https://static.wixstatic.com/media/7a07d6_ecba5b8c7a184d8294ff034fa4d25678~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_ecba5b8c7a184d8294ff034fa4d25678~mv2.jpg"  alt="foodImg" 
+                             className=" " />
+                  </div>
+                  <div className="col-span-2 row-span-2 col-start-4 row-start-5">
+                         <img src="https://static.wixstatic.com/media/7a07d6_79eb206f67364cf693cd65ed2ad2daff~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_79eb206f67364cf693cd65ed2ad2daff~mv2.jpg"  alt="foodImg" 
+                            className=" " />
+                  </div>
+                  <div className="col-span-2 row-span-2 col-start-6 row-start-5">
+                          <img src="https://static.wixstatic.com/media/7a07d6_f7356c6e1c7a481e90ac44bfbd34dd2d~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_f7356c6e1c7a481e90ac44bfbd34dd2d~mv2.jpg"  alt="foodImg" 
+                            className="" />
+                  </div>
+              </div>
+              <div className="grid grid-cols-6 grid-rows-12 gap-5 px-5">
+                  <div className="col-span-6 row-span-6 pt-5 ">
+                     <img src="https://static.wixstatic.com/media/7a07d6_31beac9edc654c75a47eb0b3fb8fcbb9~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_31beac9edc654c75a47eb0b3fb8fcbb9~mv2.jpg"  alt="foodImg" />
+                  </div>
+                  <div className="col-span-3 row-span-3 row-start-7">
+                     <img src="https://static.wixstatic.com/media/7a07d6_47cdacfd395e46fd8710ff03007c1352~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_47cdacfd395e46fd8710ff03007c1352~mv2.jpg"  alt="foodImg" />
+                  </div>
+                  <div className="col-span-3 row-span-3 col-start-4 row-start-7">
+                      <img src="https://static.wixstatic.com/media/7a07d6_f6fb2547e6114826b2891536d276be75~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_f6fb2547e6114826b2891536d276be75~mv2.jpg"  alt="foodImg" />
+                  </div>
+                  <div className="col-span-3 row-span-3 row-start-10">
+                       <img src="https://static.wixstatic.com/media/7a07d6_a603d2147eab438c9b4ec64bd60f93ac~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_a603d2147eab438c9b4ec64bd60f93ac~mv2.jpg"  alt="foodImg" />
+                  </div>
+                  <div className="col-span-3 row-span-3 col-start-4 row-start-10">
+                       <img src="https://static.wixstatic.com/media/7a07d6_df23b3775778463493fe57c8a07aa81b~mv2.jpg/v1/fit/w_1072,h_2436,q_90,enc_avif,quality_auto/7a07d6_df23b3775778463493fe57c8a07aa81b~mv2.jpg"  alt="foodImg" />
+                  </div>
+              </div>
+             <div className="imagesFooter pb-[60px] p-5 flex justify-between mt-[120px]">
                  <div>
                      <h1 className="text-green-900 font-semibold text-[80px] font-['bentham'] leading-1">
                         Gardenia </h1>
@@ -85,9 +129,9 @@ export default function HomePage() {
                         4567 NewJersey Road<br/>Pink Street,US 4004<br/>Phone:(780)456-1234
                     </p>
                  </div>
-                 <div>
+                 <div className="">
                     <p className="text-green-900 mt-[25px] font-semibold text-[50px] font-['bentham']">Follow Us</p>
-                    <div className="flex mt-[50px]">
+                    <div className="flex mt-[20px]">
                     <FaSquareInstagram size={60} className="text-pink-800 ml-[80px]"/>
                     <FaFacebook size={60}  className="text-[#3D5999] ml-[20px]"/>
                     </div>
