@@ -1,10 +1,17 @@
 import React from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function HomePage() {
   return (
     <div className="h-[100%] w-[95%] bg-white mx-auto mt-5 ">
+      <Navbar/>
+      <h2 className="text-green-900 italic font-semibold text-[40px] font-['bentham']
+         opacity-75 text-start">
+        An Authentic Mediterranean Dining Experience.
+      </h2>
       <img
         src="FoodImage.png"
         alt="food image"
@@ -139,6 +146,7 @@ export default function HomePage() {
              </div>
           </div>
       </div>
+      <Footer/>
     </div>
   );
 }

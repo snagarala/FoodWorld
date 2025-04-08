@@ -44,10 +44,15 @@ export default function HandBurgerMenu({ onClose }) {
         >
           Catering
         </p>
-        <Link to={`orderOnline`}>
-          <p className="cursor-pointer text-white font-serif">
-            Order Online</p>
-        </Link>
+        <p
+          onClick={() => {
+            navigate("/orderOnline");
+            onClose();
+          }}
+          className="cursor-pointer text-white font-serif"
+        >
+          Order Online
+        </p>
       </div>
     </div>
   );

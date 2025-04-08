@@ -1,20 +1,23 @@
 import React from 'react';
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
-
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 export default function Catering() {
   return (
+    <div className='w-[100%]'>
+      <Navbar/>
     <div className='w-[95%] mx-auto mt-[40px]'>
        <h1 className="text-green-900 font-bold font-['Fraunces'] text-center text-[90px]">
           Now Providing <br/> Catering Services</h1>
-      <div className="bg-[#F3F6F4] p-2 rounded-lg">
-          <h2 className="text-green-900 font-thin text-[38px] text-center italic font-sans">
+      <div className="bg-[#F3F6F4] p-4 rounded-3xl">
+          <h2 className="text-green-900 font-thin text-[38px] mt-4 text-center italic font-sans">
               Please submit the form below,and we will get back 
               to you <br/> right away.
          </h2>
          <div>
-            <form className='form grid grid-cols-2 gap-6 w-[650px] mt-9 ml-[40px]'>
+            <form className='form grid grid-cols-2 gap-6 w-[650px] mt-9 ml-[40px] '>
                 <div>
                 <label className='text-green-900 font-normal p-2 mb-2'>First name</label><br/>
                 <input type="text" className='rounded-lg bg-[#E1E7E3] mt-2 p-4 mr-5 w-full 
@@ -86,6 +89,8 @@ export default function Catering() {
          <FaSquareInstagram  size={60}  className="text-pink-800 ml-[80px]"/>
          <FaFacebook size={60}  className="text-[#3D5999] ml-[20px]"/>
       </div>
+      <Footer/>
+    </div>
     </div>
   )
 }

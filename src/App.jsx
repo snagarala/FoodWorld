@@ -9,14 +9,12 @@ import { Outlet } from 'react-router-dom';
 export default function App () {
   return (
     <div className="App bg-white h-screen w-full ">
-        <Navbar />
-        <div className="z-50 my-9">
-        <Outlet />
-        {/* <HomePage /> */}
+        {/* <Navbar />
+        <Outlet /> */}
+        <HomePage />
         {/* <AboutPage/> */}
         {/* <Catering/> */}
-        </div>
-        <Footer />
+        {/* <Footer /> */}
     </div>
   );
 };

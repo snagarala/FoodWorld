@@ -20,6 +20,18 @@ export default function OrderOnlinePage() {
 
   const [filteredSearchValues, setFilteredSearchValues] = useState({});
 
+  const [cartDetails, setCartDetails] = useCartDetails();
+
+  const [openDetails, setOpenDetails] = useState(false);
+  //when you click on itemImage model will open
+  const [isModelOpen, setIsModelOpen] = useState(false);
+
+  const [isAddItem, setIsAddItem] = useState(false);
+
+  function useCartDetails() {
+    return useState([]);
+  }
+
   const setScrollToCategory = () => {
     if (selectedCategory === "Categories") return allMenuItems;
     return { [selectedCategory]: allMenuItems[selectedCategory] };
@@ -54,14 +66,24 @@ export default function OrderOnlinePage() {
     setFilteredSearchValues(filtered);
   }, [selectedCategory, search]);
 
+  //index=delItemIndex [we gave in onClick]
+  function deleteItems(delItemIndex) {
+    setCartDetails(cartDetails.filter((item, index) => index !== delItemIndex));
+  }
+
+  function editItems() {
+    setIsModelOpen(true);
+    setIsAddItem(false);
+  }
+
   return (
-    <div className="w-full h-screen  pb-8">
-      <nav className="flex sticky top-0 bg-white ">
+    <div className="w-full h-screen relative pb-8">
+      <nav className="flex fixed w-full z-50 top-0 bg-white ">
         <div className="flex-[2] p-4 font-semibold border text-center">
           <p>
             Gardenia
             <br />
-            Mediterranean...{" "}
+            Mediterranean...
           </p>
         </div>
         <div className="flex-[8] flex justify-between border p-4 items-center">
@@ -74,7 +96,7 @@ export default function OrderOnlinePage() {
           </div>
         </div>
       </nav>
-      <header className="flex h-[300px] bg-[#F2F2F2]">
+      <header className="flex h-[300px] mt-[82px] bg-[#F2F2F2]">
         <div className="flex-[1] bg-[#F2F2F2] text-start items-start justify-center mt-[50px]">
           <h2 className="font-semibold mt-[90px] text-[28px] mb-4 ml-8">
             Gardenia Mediterranean <br />
@@ -88,14 +110,18 @@ export default function OrderOnlinePage() {
         <div className="flex-[1]">
           <img
             src="https://menuimages.chownowcdn.com/image-resizing?image=d6741a67-a783-4d43-b5b0-7b14a1ec3835.jpg&left=0&top=0&right=0&bottom=0&quality=85&fit=contain"
-            alt="foodImg" className="h-[300px]"
+            alt="foodImg"
+            className="h-[300px]"
           />
         </div>
       </header>
-      <div className=" flex mt-[20px] bg-white">
-        <div className="leftSection flex-[6] p-[20px] relative mt-[20px]">
-          <div className="categories  flex justify-around items-center gap-2 border-b border-zinc-300 ">
-            <div className="flex flex-[1] gap-2 justify-between px-4 pb-2 ">
+      <div className="wrapper  w-full flex bg-white">
+        <div className="leftSection bg-white  flex-[6] pl-5">
+          <div
+            className="categoriesTopSection sticky top-20 bg-white z-50  pt-[50px] 
+          flex justify-around items-center gap-2 border-b border-zinc-300 "
+          >
+            <div className=" flex flex-[1] gap-2 justify-between px-4 pb-2 ">
               <p className="font-semibold">{selectedCategory}</p>
               {open && (
                 <div className="dropdownComponent ">
@@ -120,8 +146,8 @@ export default function OrderOnlinePage() {
                 <FaChevronDown size={15} className="text-zinc-500" />
               </div>
             </div>
-            <div className="flex flex-[1] gap-2 px-4 text-zinc-500 pb-2 border-l border-zinc-300 ">
-              <IoSearchSharp size={20} className="mt-1 " />
+            <div className="flex flex-[1] gap-1 px-4 text-zinc-500 pb-2 border-l border-zinc-300 ">
+              <IoSearchSharp size={20} className="mt-3 " />
               <input
                 type="text"
                 value={search}
@@ -133,27 +159,35 @@ export default function OrderOnlinePage() {
               />
             </div>
           </div>
-          <div
-            className="offer flex border border-zinc-300 gap-2 text-center items-center 
-                 justify-center rounded-2xl py-6 mt-8"
-          >
-            <PiPackageFill size={30} className="text-[#13AA6D]" />
-            <p className="font-semibold">
-              Get 15% off after 8 orders.Log into st...
-            </p>
-            <p className="font-semibold underline">Learn More</p>
-            <FaGreaterThan size={15} className="text-zinc-500" />
-          </div>
-          <p className="text-center text-[50px] font-thin"> - - </p>
-          <div className="AppetizersCold ">
-            <ItemsCard
-              filteredSearchValues={filteredSearchValues}
-              selectedCategory={selectedCategory}
-            />
+          <div className="leftDownSectionWrapper ">
+            <div
+              className="offer flex border border-zinc-300 gap-2 text-center items-center 
+                  justify-center rounded-2xl py-6 mt-8"
+            >
+              <PiPackageFill size={30} className="text-[#13AA6D]" />
+              <p className="font-semibold">
+                Get 15% off after 8 orders.Log into st...
+              </p>
+              <p className="font-semibold underline">Learn More</p>
+              <FaGreaterThan size={15} className="text-zinc-500" />
+            </div>
+            <p className="text-center text-[50px] font-thin"> - - </p>
+            <div className="itemsCards">
+              <ItemsCard
+                filteredSearchValues={filteredSearchValues}
+                selectedCategory={selectedCategory}
+                cartDetails={cartDetails}
+                setCartDetails={setCartDetails}
+                isModelOpen={isModelOpen}
+                setIsModelOpen={setIsModelOpen}
+                isAddItem={isAddItem}
+                setIsAddItem={setIsAddItem}
+              />
+            </div>
           </div>
         </div>
-        <div className="rightSection flex-col flex-[4] m-[20px] ">
-          <div className="w-full mr-5 flex  mb-4 ">
+        <div className="rightSection flex-col flex-[4] p-[20px] ">
+          <div className=" w-full mr-5 flex pt-[30px] mb-4 ">
             <button className="bg-[#13AA6D] translate-x-8  text-white rounded-full text-center w-full cursor-pointer">
               PickUp
             </button>
@@ -161,20 +195,77 @@ export default function OrderOnlinePage() {
               Delivery
             </button>
           </div>
-          <div className="border border-zinc-300 hover:border-gray-950 cursor-pointer rounded-full w-full mb-4 py-3 
-             text-center flex items-center justify-center gap-2">
+          <div
+            className="border border-zinc-300 hover:border-gray-950 cursor-pointer rounded-full w-full mb-4 py-3 
+              text-center flex items-center justify-center gap-2"
+          >
             <CiClock2 size={20} />
             <button className="text-center text-zinc-500 ">ASAP</button>
           </div>
-          <div className="h-[220px] w-full rounded-2xl p-1 border border-zinc-300">
-            <p className="border-b p-4 font-semibold">Order Summary</p>
-            <div className="text-zinc-500 flex flex-col p-8 gap-2 items-center justify-center text-center">
-              <IoBagHandleOutline size={30} />
-              <p className="text-sm">
-                Choose an item from the
-                <br /> menu to get started
-              </p>
-            </div>
+          <div className=" w-full rounded-2xl p-1 border border-zinc-300">
+            {cartDetails?.length == 0 && (
+              <div className="wrapperForOrderSummery">
+                <p className="border-b p-4 font-semibold">Order Summary</p>
+                <div className="text-zinc-500 flex flex-col p-8 gap-2 items-center justify-center text-center">
+                  <IoBagHandleOutline size={30} />
+                  <p className="text-sm ">
+                    Choose an item from the
+                    <br /> menu to get started
+                  </p>
+                </div>
+              </div>
+            )}
+            {cartDetails?.length > 0 && (
+              <div>
+                <p className="border-b p-4 font-semibold">Order Summary</p>
+                <div>
+                  {cartDetails.map((cartItem, index) => (
+                    <div key={index} className="flex flex-col  ">
+                      <div className="flex justify-around pt-5 px-2 py-1">
+                        <p className="pr-1"> {cartItem.quantity}</p>
+                        <p className="font-semibold mb-4 cursor-pointer">
+                          {cartItem.name}{" "}
+                        </p>
+                        <p className="pl-[40px] cursor-pointer">
+                          $ {Number(cartItem.price).toFixed(2)}
+                        </p>
+                      </div>
+                      <div className="flex pb-5 px-2 py-1">
+                        <button
+                          onClick={editItems}
+                          className="underline pl-5 text-underline-offset-4 cursor-pointer decoration-1 hover:text-[#13AA6D]"
+                        >
+                          Edit Item
+                        </button>
+                        <button
+                          onClick={() => deleteItems(index)}
+                          className="underline pl-5 text-underline-offset-4 cursor-pointer decoration-1 hover:text-[#13AA6D]"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="subTotalSection border-t flex flex-col gap-5 px-4 py-1 ">
+                    <div className="flex justify-between  mt-5">
+                      <p className="font-bold text-[20px]">Subtotal</p>
+                      <p className="font-bold">
+                        ${" "}
+                        {cartDetails
+                          .reduce((acc, item) => acc + Number(item.price), 0)
+                          .toFixed(2)}
+                      </p>
+                    </div>
+                    <button
+                      className="bg-[#13AA6D] hover:bg-emerald-600 text-white  py-4 mb-4 font-semibold
+                            rounded-full text-center w-full cursor-pointer "
+                    >
+                      Checkout
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

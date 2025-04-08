@@ -13,7 +13,7 @@ export default function Navbar() {
     setIsHandBurger(false);
   }
   return (
-    <nav className="sticky top-0 z-50 w-[95%]  bg-white pt-[50px] mx-auto">
+    <nav className=" w-[100%]  bg-white pt-[50px] mx-auto">
       <div className="wrapper relative flex justify-between w-full h-[40rem]">
         <div onClick={() => {
             navigate("/");
@@ -35,10 +35,7 @@ export default function Navbar() {
           <IoMenu size={60} />
         </div>
       </div>
-      <h2 className="text-green-900 italic font-semibold text-[40px] font-['bentham']
-         opacity-75 text-start">
-        An Authentic Mediterranean Dining Experience.
-      </h2>
+     
       <div className="model ">
         {isHandBurger && 
         <HandBurgerMenu onClose={onClose} />

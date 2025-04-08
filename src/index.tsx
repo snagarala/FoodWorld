@@ -5,11 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
-import {
-  createBrowserRouter,
-  RouterProvider,
- 
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/Restaurant/HomePage";
 import AboutPage from "./components/Restaurant/AboutPage";
 import Catering from "./components/Restaurant/Catering";
@@ -22,25 +18,23 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children:[
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/about",
-        element: <AboutPage />,
-      },
-      {
-        path: "/catering",
-        element: <Catering />,
-      },
-    ],
+  },
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/about",
+    element: <AboutPage />,
+  },
+  {
+    path: "/catering",
+    element: <Catering />,
   },
   {
     path: "/orderOnline",
-    element: <OrderOnlinePage/>
-  }
+    element: <OrderOnlinePage />,
+  },
 ]);
 
 root.render(

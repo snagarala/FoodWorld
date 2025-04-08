@@ -8,6 +8,7 @@ let foodItems = {
         "Creamy with touch of olive oil, lemon juice,garlic,tahini,spices.",
       price: "9.95",
       image: "hummus.jpg",
+      quantity:1,
     },
     {
       id: 2,
@@ -16,6 +17,7 @@ let foodItems = {
       description: "Grape leaves Stuffed with rice,tomatoes,and olive oil.",
       price: "11.00",
       image: "grapeleaves.png",
+      quantity:1,
     },
     {
       id: 3,
@@ -25,6 +27,7 @@ let foodItems = {
         "Home made rice & creamy Grilled Eggplant,Home made rice & creamy Grilled Eggplant.",
       price: "9.95",
       image: "bread.jpg",
+      quantity:1,
     },
   ],
   "Appetizers | hot": [
@@ -35,6 +38,7 @@ let foodItems = {
       description: "Crispy with sweet & spice chili sauce.",
       price: "12.50",
       image: "shrimp.jpg",
+      quantity:1,
     },
     {
       id: 5,
@@ -43,6 +47,7 @@ let foodItems = {
       description: "With marinara sauce.",
       price: "16.00",
       image: "onionRings.jpg",
+      quantity:1,
     },
     {
       id: 6,
@@ -51,6 +56,7 @@ let foodItems = {
       description: "Crispy Fried ones.",
       price: "10.00",
       image: "frenchFries.jpg",
+      quantity:1,
     },
     {
       id: 7,
@@ -59,6 +65,7 @@ let foodItems = {
       description: "Crispy Fried ones.",
       price: "15.00",
       image: "falafel.jpg",
+      quantity:1,
     },
   ],
   "Soup of the day": [
@@ -69,6 +76,7 @@ let foodItems = {
       description: "All fresh,nothing from a can.seasoning & herbs.",
       price: "7.50",
       image: "lentilSoup.jpg",
+      quantity:1,
     },
     {
       id: 9,
@@ -77,6 +85,7 @@ let foodItems = {
       description: "All fresh,nothing from a can.seasoning & herbs.",
       price: "8.00",
       image: "tomatoSoup.jpg",
+      quantity:1,
     },
     {
       id: 10,
@@ -85,6 +94,7 @@ let foodItems = {
       description: "All fresh,nothing from a can.seasoning & herbs.",
       price: "12.00",
       image: "mushroomSoup.jpg",
+      quantity:1,
     },
   ],
   "Salads": [
@@ -95,6 +105,7 @@ let foodItems = {
       description: "Fresh mixed vegetables with fresh herbs and cheese.",
       price: "15.00",
       image: "houseSalad.jpg",
+      quantity:1,
     },
     {
       id: 12,
@@ -103,6 +114,7 @@ let foodItems = {
       description: "Fresh mixed Beans with fresh herbs and cheese.",
       price: "13.00",
       image: "beansSalad.jpg",
+      quantity:1,
     },
   ],
   "Sandwiches": [
@@ -113,6 +125,7 @@ let foodItems = {
       description: "Fresh cooked chicken with vegetables and cream.",
       price: "18.00",
       image: "chickenSandwich.jpg",
+      quantity:1,
     },
     {
       id: 14,
@@ -121,6 +134,7 @@ let foodItems = {
       description: "Fresh cooked Eggs with herbs and cream.",
       price: "14.00",
       image: "eggSandwich.jpg",
+      quantity:1,
     },
     {
       id: 15,
@@ -129,6 +143,7 @@ let foodItems = {
       description: "Fresh garden grown vegetables with mixed herbs and cream.",
       price: "10.99",
       image: "vegSandwich.jpg",
+      quantity:1,
     },
     {
       id: 16,
@@ -137,6 +152,7 @@ let foodItems = {
       description: "Fresh organic Avocados with mixed herbs and cream.",
       price: "6.00",
       image: "avocadoSandwich.jpg",
+      quantity:1,
     },
   ],
   "Coffee": [
@@ -147,6 +163,7 @@ let foodItems = {
       description: "Hot Home Style Coffee",
       price: "6.00",
       image: "hotCoffee.jpg",
+      quantity:1,
     },
   ],
 };
@@ -160,6 +177,7 @@ let kidsMenu = {
       "Rich Chocolate cake with a dense,fudgy base,topped with chocolate cream.",
     price: "8.50",
     image: "chocolateCake.jpg",
+    quantity:1,
   },
   {
     id: 19,
@@ -168,6 +186,7 @@ let kidsMenu = {
     description: "Creamy CheeseCake slice with fresh fruits.",
     price: "10.00",
     image: "cheeseCake.jpg",
+    quantity:1,
   },
   {
     id: 20,
@@ -176,6 +195,7 @@ let kidsMenu = {
     description: "Fresh strawberries with cream.",
     price: "20.00",
     image: "StrawberryCake.jpg",
+    quantity:1,
   }],
   "Pizza":[
   {
@@ -185,6 +205,7 @@ let kidsMenu = {
     description: "Kid's mini cheese pizza.",
     price: "12.00",
     image: "cheesePizza.jpg",
+    quantity:1,
   },
   {
     id: 22,
@@ -193,6 +214,7 @@ let kidsMenu = {
     description: "Fresh vegetables with cheese.",
     price: "10.00",
     image: "vegPizza.jpg",
+    quantity:1,
   },
   {
     id: 23,
@@ -201,6 +223,7 @@ let kidsMenu = {
     description: "Fresh chicken with cheese.",
     price: "14.99",
     image: "chickenPizza.jpg",
+    quantity:1,
   }],
   "Cold Coffee":[
   {
@@ -210,6 +233,7 @@ let kidsMenu = {
     description: "Cold Coffee with cream and chocolate chips.",
     price: "18.00",
     image: "coldCoffee.jpg",
+    quantity:1,
   }],
   "IceCreams":[
   {
@@ -219,6 +243,7 @@ let kidsMenu = {
     description: "All type of IceCream Flavours.",
     price: "10.00",
     image: "iceCreams.jpg",
+    quantity:1,
   }],
 };
 

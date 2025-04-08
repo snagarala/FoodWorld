@@ -4,7 +4,7 @@ import React from 'react';
 //681C03-input border
 export default function Footer() {
   return (
-    <div className='footer  w-[95%]  mx-auto bg-[#F6F6EE]  p-[40px]'>
+    <div className='footer  w-[100%]  mx-auto bg-[#F6F6EE]  p-[40px] mt-8'>
         <h1 className="text-green-900 font-bold text-start text-[40px] font-['cormorant_garamond'] mb-2">
             Join Our<br/> Mailing List</h1>
      <form className='flex flex-col '>
