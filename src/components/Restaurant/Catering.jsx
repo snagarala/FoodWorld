@@ -89,7 +89,9 @@ export default function Catering() {
          <FaSquareInstagram  size={60}  className="text-pink-800 ml-[80px]"/>
          <FaFacebook size={60}  className="text-[#3D5999] ml-[20px]"/>
       </div>
-      <Footer/>
+      <div className='mb-5'>
+       <Footer/>
+      </div>
     </div>
     </div>
   )

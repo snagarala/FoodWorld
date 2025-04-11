@@ -46,7 +46,7 @@ export default function AboutPage() {
           <FaFacebook size={60} className="text-[#3D5999] ml-[20px]" />
         </div>
       </div>
-      <div className="mt-[150px] mx-5">
+      <div className="mt-[150px] mx-5 mb-5">
       <Footer />
       </div> 
     </div>

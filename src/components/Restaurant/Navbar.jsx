@@ -4,20 +4,22 @@ import HandBurgerMenu from "./HandBurgerMenu";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-
   const navigate = useNavigate();
-  
+
   const [isHandBurger, setIsHandBurger] = useState(false);
 
   function onClose() {
     setIsHandBurger(false);
   }
   return (
-    <nav className=" w-[100%]  bg-white pt-[50px] mx-auto">
+    <nav className=" w-[100%]  bg-white pt-[50px]">
       <div className="wrapper relative flex justify-between w-full h-[40rem]">
-        <div onClick={() => {
+        <div
+          onClick={() => {
             navigate("/");
-          }} className=" mt-[20px] ml-[20px] cursor-pointer">
+          }}
+          className=" mt-[20px] ml-[20px] cursor-pointer"
+        >
           <h1 className="text-green-900 font-semibold text-[150px] font-['bentham'] leading-1">
             Gardenia
           </h1>
@@ -35,12 +37,10 @@ export default function Navbar() {
           <IoMenu size={60} />
         </div>
       </div>
-     
+
       <div className="model ">
-        {isHandBurger && 
-        <HandBurgerMenu onClose={onClose} />
-        }
-        </div>
+        {isHandBurger && <HandBurgerMenu onClose={onClose} />}
+      </div>
     </nav>
   );
 }
