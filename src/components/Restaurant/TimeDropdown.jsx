@@ -1,6 +1,6 @@
 import React from "react";
 
-function generateTimeOptions(start = "10:00", end = "20:00") {
+ function generateTimeOptions(start = "10:00", end = "20:00") {
   const times = [];
   const [startHour, startMinute] = start.split(":").map(Number);
   const [endHour, endMinute] = end.split(":").map(Number);
@@ -25,13 +25,13 @@ function generateTimeOptions(start = "10:00", end = "20:00") {
   return times;
 }
 
-export default function TimeDropdown() {
+export default function TimeDropdown({onChange}) {
   const timeOptions = generateTimeOptions("10:00", "20:00");
 
   return (
     <div className="mt-5">
       {/* <label className="block text-sm font-medium mb-2">Select a Pickup Time:</label> */}
-      <select
+      <select  onChange={(e) => onChange(e.target.value)}
         className="block w-full p-3 pr-10 border border-stone-300 rounded-md mt-2 shadow-sm text-stone-600 overflow-hidden
                  focus:outline-none focus:ring-1 focus:ring-stone-500 hover:ring-stone-400 hover:ring-2 cursor-pointer"
       >

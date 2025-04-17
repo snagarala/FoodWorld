@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { GoPerson } from "react-icons/go";
-import { IoBagHandleOutline } from "react-icons/io5";
-import { CiClock2 } from "react-icons/ci";
 import { FaChevronDown } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
 import { PiPackageFill } from "react-icons/pi";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
-import { GiForkKnifeSpoon } from "react-icons/gi";
 import ItemsCard from "./ItemsCard";
 import CategoryDropDown from "./CategoryDropDown";
 import { foodItems, kidsMenu } from "./foodItems";
@@ -18,7 +15,9 @@ import { SlBadge } from "react-icons/sl";
 import { GiKnifeFork } from "react-icons/gi";
 import TimeDropdown from "./TimeDropdown";
 import DateDropdown from "./DateDropdown";
-import PickupDeliveryModal from "./PickupDeliveryModal";
+import RightSideOrderOnlinePage from "./RightSideOrderOnlinePage";
+import FooterOrderOnline from "./FooterOrderOnline";
+import ModelAfterBussHours from "./ModelAfterBussHours";
 
 export default function OrderOnlinePage() {
   const [open, setOpen] = useState(false);
@@ -46,19 +45,17 @@ export default function OrderOnlinePage() {
 
   const [learnMore, setLearnMore] = useState(false);
 
+  //DateTimeModel
   const [pickupDetails, setPickupDetails] = useState(false);
 
-  const [selectedDate, setSelectedDate] = useState("");
+  const [pickupInfo, setPickupInfo] = useState({
+    date: null,
+    time: null,
+  });
+  const dateSelectRef = useRef(null);
+  const timeSelectRef = useRef(null);
 
-  const [mode, setMode] = useState('Pickup');
-
-  //pickup delivery logic
-  const [modalOpen, setModalOpen] = useState(false);
-  const [pickupInfo, setPickupInfo] = useState(null);
-
-  const handleUpdate = (data) => {
-    setPickupInfo(data);
-  };
+  const [mode, setMode] = useState("Pickup");
 
   function useCartDetails() {
     return useState([]);
@@ -132,6 +129,9 @@ export default function OrderOnlinePage() {
 
     let updatedItem;
 
+    // Check if cart is empty before adding the item
+    const isFirstItem = cartDetails.length === 0;
+
     if (existingItem && isAddItem) {
       // Update quantity and price [if you want to increase same item]
       updatedItem = {
@@ -150,7 +150,56 @@ export default function OrderOnlinePage() {
 
     setCartDetails([...otherItems, updatedItem]);
     setIsModelOpen(false);
+    // Show pickup modal only if it's the first item
+    if (isFirstItem) {
+      setPickupDetails(true);
+    }
   }
+
+  function handleDateTime() {
+    //Check if pickupInfo.date or pickupInfo.time is null,
+    // then get the current value of the Date and time component and set it to the pickInfo.
+    const selectedDateValue = dateSelectRef.current?.value;
+    const selectedTimeValue = timeSelectRef.current?.value;
+    if (!pickupInfo.date) {
+      setPickupInfo((prev) => ({ ...prev, date: selectedDateValue }));
+    }
+    if (!pickupInfo.time) {
+      setPickupInfo((prev) => ({ ...prev, time: selectedTimeValue }));
+    }
+    setPickupDetails(false);
+  }
+
+  //ModelAfterBussHours code
+  // Business hours: 10 AM - 8 PM
+  const [showAfterHours, setShowAfterHours] = useState(true);
+  const businessStart = 10;
+  const businessEnd = 20;
+
+  const isOutsideBusinessHours = () => {
+    const now = new Date();
+    const hour = now.getHours();
+    return hour < businessStart || hour >= businessEnd;
+  };
+
+  const getNextPickupTime = () => {
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+    tomorrow.setHours(12, 15, 0, 0); // 12:15 PM tomorrow
+
+    const options = { weekday: "long", hour: "numeric", minute: "2-digit" };
+    const day = tomorrow.toLocaleDateString("en-US", { weekday: "long" });
+    const time = tomorrow.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+
+    return { day, time };
+  };
+
+  const { day, time } = getNextPickupTime();
+
   return (
     <div className="w-full h-screen relative pb-8">
       <nav className="flex fixed w-full z-50 top-0 bg-white ">
@@ -325,126 +374,24 @@ export default function OrderOnlinePage() {
                 setIsModelOpen={setIsModelOpen}
                 setIsAddItem={setIsAddItem}
                 setSelectedItem={setSelectedItem}
+                setPickupDetails={setPickupDetails}
               />
             </div>
           </div>
         </div>
         <div className="rightSection flex-col flex-[4] p-[20px] max-w-[500px] min-w-[300px] ">
-          <div className=" w-full mr-5 flex pt-[30px] mb-4 ">
-            <button onClick={() => setMode('Pickup')}
-            className={`bg-[#13AA6D] translate-x-8 text-white rounded-full text-center
-             w-full cursor-pointer  ${mode === 'Pickup' ? "bg-[#13AA6D] text-white" : "bg-[#F2F2F2] text-black" }`}>
-              PickUp
-            </button>
-            <button onClick={() => setMode('Delivery')}
-            className={`bg-[#F2F2F2]  rounded-full w-full py-3 text-center  hover:text-green-900 cursor-pointer 
-              ${mode === "Delivery" ? "bg-[#13AA6D] text-white" : "bg-[#F2F2F2] text-black" } `}>
-              Delivery
-            </button>
-          </div>
-          <div
-            onClick={() => setPickupDetails(true)}
-            className="border border-zinc-300 hover:border-gray-950 cursor-pointer rounded-full w-full mb-4 py-3 
-              text-center flex items-center justify-center gap-2"
-          >
-            <CiClock2 size={20} />
-            <button className="text-center text-zinc-500 ">ASAP</button>
-          </div>
-          <div className=" w-full rounded-2xl p-1 border border-zinc-300">
-            {cartDetails?.length === 0 && (
-              <div className="wrapperForOrderSummery">
-                <p className="border-b p-4 font-semibold">Order Summary</p>
-                <div className="text-zinc-500 flex flex-col p-8 gap-2 items-center justify-center text-center">
-                  <IoBagHandleOutline size={30} />
-                  <p className="text-sm ">
-                    Choose an item from the
-                    <br /> menu to get started
-                  </p>
-                </div>
-              </div>
-            )}
-              {/* Pickup and Delivery */}
-            <div className="min-h-[300px] flex flex-col items-center
-              justify-center bg-gray-100 p-6">
-              <button
-                onClick={() => setModalOpen(true)}
-                className="bg-green-600 text-white px-6 py-3 rounded-full"
-              >
-                Choose Pickup/Delivery Time
-              </button>
-               
-              {pickupInfo && (
-                <div className="mt-4 p-4 bg-white rounded shadow-md text-sm">
-                  <p>
-                    <strong>Mode:</strong> {pickupInfo.mode}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {pickupInfo.selectedDate}
-                  </p>
-                  <p>
-                    <strong>Time:</strong> {pickupInfo.selectedTime}
-                  </p>
-                </div>
-              )}
-
-              <PickupDeliveryModal
-                isOpen={modalOpen}
-                onClose={() => setModalOpen(false)}
-                onUpdate={handleUpdate}
-              />
-            </div>
-
-            {cartDetails?.length > 0 && (
-              <div>
-                <p className="border-b p-4 font-semibold">Order Summary</p>
-                <div>
-                  {cartDetails.map((cartItem, index) => (
-                    <div key={index} className="flex flex-col  ">
-                      <div className="flex justify-around pt-5 px-2 py-1">
-                        <p className="pr-1"> {cartItem.quantity}</p>
-                        <p className="font-semibold mb-4 cursor-pointer">
-                          {cartItem.name}{" "}
-                        </p>
-                        <p className="pl-[40px] cursor-pointer">
-                          $ {Number(cartItem.price).toFixed(2)}
-                        </p>
-                      </div>
-                      <div className="flex pb-5 px-2 py-1">
-                        <button
-                          onClick={() => editItems(index)}
-                          className="underline pl-5 text-underline-offset-4 cursor-pointer decoration-1 hover:text-[#13AA6D]"
-                        >
-                          Edit Item
-                        </button>
-                        <button
-                          onClick={() => deleteItems(index)}
-                          className="underline pl-5 text-underline-offset-4 cursor-pointer decoration-1 hover:text-[#13AA6D]"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                  <div className="subTotalSection border-t flex flex-col gap-5 px-4 py-1 ">
-                    <div className="flex justify-between  mt-5">
-                      <p className="font-bold text-[20px]">Subtotal</p>
-                      <p className="font-bold">
-                        ${" "}
-                        {cartDetails
-                          .reduce((acc, item) => acc + Number(item.price), 0)
-                          .toFixed(2)}
-                      </p>
-                    </div>
-                    <button
-                      className="bg-[#13AA6D] hover:bg-emerald-600 text-white  py-4 mb-4 font-semibold
-                            rounded-full text-center w-full cursor-pointer "
-                    >
-                      Checkout
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+          <div>
+            <RightSideOrderOnlinePage
+              mode={mode}
+              setMode={setMode}
+              pickupDetails={pickupDetails}
+              setPickupDetails={setPickupDetails}
+              cartDetails={cartDetails}
+              setCartDetails={setCartDetails}
+              editItems={editItems}
+              deleteItems={deleteItems}
+              pickupInfo={pickupInfo}
+            />
           </div>
         </div>
       </div>
@@ -678,17 +625,17 @@ export default function OrderOnlinePage() {
           </div>
         </div>
       )}
-      {/* Model for pickup details-date & time right 2nd one  */}
+      {/* Model for pickup details-date & time rightPart 2nd one  */}
       {pickupDetails && (
         <section className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-50  flex items-center justify-center">
           <div className="relative h-[400px] w-[500px] bg-white rounded-2xl overflow-auto ">
             <div className="border-b">
-              <h2 className="font-semibold absolute top-6 left-8 text-[20px]">
+              <h2 className="title font-semibold absolute top-6 left-8 text-[20px]">
                 Pickup Details
               </h2>
               <button
                 onClick={() => setPickupDetails(false)}
-                className=" absolute top-6 right-6 cursor-pointer  "
+                className="closeButton absolute top-6 right-6 cursor-pointer  "
               >
                 <IoCloseOutline size={50} className=" text-gray-400 p-2" />
               </button>
@@ -696,12 +643,24 @@ export default function OrderOnlinePage() {
             <hr className="flex-grow border-t-2  border-stone-200 mb-5 mt-[80px]" />
             <div className="  px-[40px] mb-8">
               <p className="p-2 mt-8 text-sm font-semibold">Pickup Time</p>
-              <DateDropdown onChange={(value) => setSelectedDate(value)} />
-              <TimeDropdown />
+              <DateDropdown
+                ref={dateSelectRef}
+                onChange={(val) =>
+                  setPickupInfo((prev) => ({ ...prev, date: val }))
+                }
+              />
+              <TimeDropdown
+                ref={timeSelectRef}
+                onChange={(val) =>
+                  setPickupInfo((prev) => ({ ...prev, time: val }))
+                }
+              />
+             
             </div>
             <hr className="flex-grow border-t-2  border-stone-200 mb-5" />
             <div className="flex items-center justify-center">
               <button
+                onClick={handleDateTime}
                 className="rounded-full bg-[#13AA6D] hover:bg-green-700 w-[80%]
                       px-8 py-3 text-white cursor-pointer"
               >
@@ -711,30 +670,12 @@ export default function OrderOnlinePage() {
           </div>
         </section>
       )}
+
+      {isOutsideBusinessHours() && showAfterHours && (
+        <ModelAfterBussHours setShowAfterHours={setShowAfterHours} />
+      )}
       <footer className="border-t p-8">
-        <div className="flex gap-2 cursor-pointer">
-          <p className="font-semibold">Powered By</p>
-          <GiForkKnifeSpoon
-            size={15}
-            className="w-[25px] h-[25px] text-white p-1 bg-black rounded-full"
-          />
-          <p className="font-semibold">ChowNow</p>
-        </div>
-        <div className="flex justify-between items-center mt-8">
-          <p className="cursor-pointer text-black hover:text-cyan-500">
-            About Us
-          </p>
-          <p className="cursor-pointer text-black hover:text-cyan-500">Help</p>
-          <p className="cursor-pointer text-black hover:text-cyan-500">
-            Terms of Use
-          </p>
-          <p className="cursor-pointer text-black hover:text-cyan-500">
-            Personal Information
-          </p>
-          <p className="cursor-pointer text-black hover:text-cyan-500">
-            Privacy policy
-          </p>
-        </div>
+        <FooterOrderOnline />
       </footer>
     </div>
   );

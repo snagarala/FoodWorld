@@ -6,6 +6,7 @@ export default function ItemsCard({
   setIsModelOpen,
   setIsAddItem,
   setSelectedItem,
+  setPickupDetails,
 }) {
   return (
     <div className="itemsCard">
