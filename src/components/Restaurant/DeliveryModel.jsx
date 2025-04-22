@@ -8,6 +8,20 @@ export default function DeliveryModel({
   setIsToggled,
   setMode,
 }) {
+  const [address, setAddress] = useState("");
+  const [apt, setApt] = useState("");
+  const [showValidation, setShowValidation] = useState(false);
+
+  const handleUpdate = () => {
+    if (address.trim() === "" || apt.trim() === "") {
+      setShowValidation(true);
+    } else {
+      // Proceed with the update
+      console.log("Delivery Info Submitted");
+      setIsDeliveryModel(false);
+    }
+  };
+
   return (
     <div>
       <section
@@ -23,7 +37,7 @@ export default function DeliveryModel({
               onClick={() => {
                 setIsDeliveryModel(false);
                 setIsToggled(false);
-                setMode("Pickup");
+                // setMode("Pickup");
               }}
               className="absolute top-6 right-6 text-2xl text-zinc-600 cursor-pointer
                   hover:text-black "
@@ -38,9 +52,12 @@ export default function DeliveryModel({
             </div>
             <div className="flex items-center justify-between mt-5">
               <p className="text-sm font-semibold">Delivered To</p>
-              <p className="text-xs border font-normal rounded-md py-1 px-2 uppercase">
-                Required
-              </p>
+                  <p className={`text-xs border font-normal rounded-md py-1 px-2 uppercase 
+                  ${showValidation && (address.trim() === "" || apt.trim() === "")
+                  ? "text-red-500 border-red-500"
+                  : "text-black border-black"}`}>
+                    Required
+                  </p>
             </div>
             <div className="gap-4 flex flex-col items-center justify-center my-5">
               <div className="relative w-full">
@@ -51,16 +68,28 @@ export default function DeliveryModel({
                 <input
                   type="text"
                   placeholder="Your Address"
+                  value={address}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                    setShowValidation(false);
+                  }}
                   className="border focus:outline-dashed focus:outline-1 focus:outline-black
                       focus:outline-offset-4 w-full rounded-lg py-3 px-4 pl-10"
                 />
               </div>
+
               <input
                 type="text"
                 placeholder="Ste, Apt, Floor "
+                value={apt}
+                onChange={(e) => {
+                  setApt(e.target.value);
+                  setShowValidation(false);
+                }}
                 className="border focus:outline-dashed focus:outline-1 focus:outline-black
                    focus:outline-offset-4  w-full py-3 rounded-lg px-4 "
               />
+
               <textarea
                 name=""
                 type="text"
@@ -77,6 +106,7 @@ export default function DeliveryModel({
               justify-center border-t border-gray-200  "
           >
             <button
+              onClick={handleUpdate}
               className=" w-[480px] py-3 bg-[#13AA6D] hover:bg-green-700 mt-5 mb-5
                   text-white rounded-full font-semibold"
             >

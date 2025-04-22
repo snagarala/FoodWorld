@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 export default function ItemsCard({
+  selectedCategory,
   filteredSearchValues,
   setIsModelOpen,
   setIsAddItem,
   setSelectedItem,
-  setPickupDetails,
+  categoryRefs,
 }) {
   return (
     <div className="itemsCard">
       <div>
-        {Object.entries(filteredSearchValues).map(
-          ([category, items], index) => (
-            <div key={category} className="mb-6">
+        {Object.entries(filteredSearchValues)
+          // .filter(([category]) =>
+          //   selectedCategory === "Categories" || selectedCategory === ""
+          //     ? true
+          //     : category === selectedCategory
+          // )
+          .map(([category, items]) => (
+            <div
+              key={category}
+              //Attaching Ref for scrolling track
+              ref={(el) => (categoryRefs.current[category] = el)}
+              className="mb-6"
+            >
               <h2 className="font-medium text-[28px] ml-2">{category}</h2>
               {items.map((item) => (
                 <div key={item.id}>
@@ -41,8 +52,7 @@ export default function ItemsCard({
                 </div>
               ))}
             </div>
-          )
-        )}
+          ))}
       </div>
     </div>
   );

@@ -13,15 +13,21 @@ import { FaGoogle } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import { SlBadge } from "react-icons/sl";
 import { GiKnifeFork } from "react-icons/gi";
-import TimeDropdown from "./TimeDropdown";
-import DateDropdown from "./DateDropdown";
 import RightSideOrderOnlinePage from "./RightSideOrderOnlinePage";
 import FooterOrderOnline from "./FooterOrderOnline";
 import ModelAfterBussHours from "./ModelAfterBussHours";
+import PickupModel from "./PickupModel";
 
 export default function OrderOnlinePage() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); //categoryDropDown
   const [selectedCategory, setSelectedCategory] = useState("Categories");
+  //to Display category name when scroll up
+  const categoryRefs = useRef({});
+  const isClickScroll = useRef(false);
+  //changes to be made
+  //   isClickScroll.current = true; // 👈 Set the manual scroll flag
+  // setSelectedCategory(category);
+
   // Merge both menus into a single state variable
   const [allMenuItems] = useState({ ...foodItems, ...kidsMenu });
   const [search, setSearch] = useState("");
@@ -30,7 +36,7 @@ export default function OrderOnlinePage() {
 
   const [cartDetails, setCartDetails] = useCartDetails();
 
-  const [openDetails, setOpenDetails] = useState(false);
+  //const [openDetails, setOpenDetails] = useState(false);
   //when you click on itemImage model will open
   const [isModelOpen, setIsModelOpen] = useState(false);
 
@@ -46,14 +52,15 @@ export default function OrderOnlinePage() {
   const [learnMore, setLearnMore] = useState(false);
 
   //DateTimeModel
-  const [pickupDetails, setPickupDetails] = useState(false);
+  const [isPickupModel, setIsPickupModel] = useState(false);
 
   const [pickupInfo, setPickupInfo] = useState({
     date: null,
     time: null,
+    address1: null,
+    address2: null,
+    delivery_notes: null,
   });
-  const dateSelectRef = useRef(null);
-  const timeSelectRef = useRef(null);
 
   const [mode, setMode] = useState("Pickup");
 
@@ -62,18 +69,87 @@ export default function OrderOnlinePage() {
   }
 
   const setScrollToCategory = () => {
-    if (selectedCategory === "Categories") return allMenuItems;
-    return { [selectedCategory]: allMenuItems[selectedCategory] };
+    if (selectedCategory === "Categories") {
+      return filteredSearchValues;
+    }
+    return Object.entries(filteredSearchValues).reduce((acc, [category, items]) => {
+      if (category === selectedCategory) {
+        acc[category] = items;
+      }
+      return acc;
+    }, {});
   };
+
+  //to display category name when user scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting);
+        if (visibleEntry?.target) {
+          const category = visibleEntry.target.getAttribute("data-category");
+          if (category) setSelectedCategory(category);
+        }
+      },
+      {
+        rootMargin: "-50% 0px -50% 0px", // triggers when element is in middle-ish
+        threshold: 0,
+      }
+    );
+
+    Object.entries(categoryRefs.current).forEach(([category, element]) => {
+      if (element) {
+        element.setAttribute("data-category", category);
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [filteredSearchValues]);
+
+  //scroll Tracking Logic
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY + 120;
+
+          const categoryEntries = Object.entries(categoryRefs.current);
+
+          let currentCategory = selectedCategory;
+
+          for (let i = 0; i < categoryEntries.length; i++) {
+            const [category, ref] = categoryEntries[i];
+            if (ref && ref.offsetTop <= scrollY) {
+              currentCategory = category;
+            }
+          }
+
+          // Only update if it's not a click scroll and category actually changed
+          if (!isClickScroll.current && currentCategory !== selectedCategory) {
+            setSelectedCategory(currentCategory);
+          }
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [selectedCategory]);
 
   useEffect(() => {
     let filtered = { ...allMenuItems };
+    
     // Apply search filter
     if (search.trim() !== "") {
       const searchLower = search.toLowerCase();
-      console.log(searchLower, "searchLower");
-      console.log(allMenuItems, "allMenuItems");
-
       filtered = Object.entries(allMenuItems).reduce(
         (acc, [category, items]) => {
           const matchingItems = items.filter(
@@ -88,9 +164,14 @@ export default function OrderOnlinePage() {
         },
         {}
       );
-      console.log(filtered, "filtered with search str");
     }
-    console.log(filtered, "calling setFilteredSearchValues after search str");
+
+    // Apply category filter if a specific category is selected
+    if (selectedCategory !== "Categories") {
+      filtered = {
+        [selectedCategory]: filtered[selectedCategory] || []
+      };
+    }
 
     setFilteredSearchValues(filtered);
   }, [selectedCategory, search]);
@@ -104,7 +185,7 @@ export default function OrderOnlinePage() {
     let cartEditItem = cartDetails[index];
 
     let allItems = [];
-    Object.entries(filteredSearchValues).map(([category, items], index) =>
+    Object.entries(filteredSearchValues).map(([categoryName, items], index) =>
       allItems.push(...items)
     );
     let selectedEditItem = allItems.find((e) => e.id === cartEditItem.id);
@@ -152,22 +233,8 @@ export default function OrderOnlinePage() {
     setIsModelOpen(false);
     // Show pickup modal only if it's the first item
     if (isFirstItem) {
-      setPickupDetails(true);
+      setIsPickupModel(true);
     }
-  }
-
-  function handleDateTime() {
-    //Check if pickupInfo.date or pickupInfo.time is null,
-    // then get the current value of the Date and time component and set it to the pickInfo.
-    const selectedDateValue = dateSelectRef.current?.value;
-    const selectedTimeValue = timeSelectRef.current?.value;
-    if (!pickupInfo.date) {
-      setPickupInfo((prev) => ({ ...prev, date: selectedDateValue }));
-    }
-    if (!pickupInfo.time) {
-      setPickupInfo((prev) => ({ ...prev, time: selectedTimeValue }));
-    }
-    setPickupDetails(false);
   }
 
   //ModelAfterBussHours code
@@ -266,6 +333,7 @@ export default function OrderOnlinePage() {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                     setOpen={setOpen}
+                    isClickScroll={isClickScroll}
                   />
                 </div>
               )}
@@ -276,17 +344,26 @@ export default function OrderOnlinePage() {
                 <FaChevronDown size={15} className="text-zinc-500" />
               </div>
             </div>
-            <div className="flex flex-[1] gap-1 px-4 text-zinc-500 pb-2 border-l border-zinc-300 ">
+            <div className="flex flex-[1] relative gap-1 px-4 text-zinc-500 pb-2 border-l border-zinc-300 ">
               <IoSearchSharp size={20} className="mt-3 " />
               <input
                 type="text"
                 value={search}
                 placeholder="Search"
-                className="focus:outline-dotted p-2 outline-black cursor-pointer"
+                className="focus:outline-dashed py-2 px-4 outline-black cursor-pointer"
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
               />
+              {search && (
+                <IoCloseOutline
+                  size={20}
+                  onClick={() => {
+                    setSearch("");
+                  }}
+                  className="mt-3 absolute top-0 right-20 cursor-pointer"
+                />
+              )}
             </div>
           </div>
           <div className="leftDownSectionWrapper ">
@@ -367,14 +444,26 @@ export default function OrderOnlinePage() {
                 -{" "}
               </p>
             </div>
-
+            {/* Show message if no items match */}
+            {search.trim() !== "" &&
+              Object.values(filteredSearchValues).flat().length === 0 && (
+                <p className="text-start mt-4 font-semibold text-md">
+                  Sorry, no menu items found for "{search}"
+                  <br />
+                  <span className="font-light text-md ">
+                    Please try searching for something else or make sure the
+                    spelling is correct.
+                  </span>
+                </p>
+              )}
             <div className="itemsCards">
               <ItemsCard
+                selectedCategory={selectedCategory}
                 filteredSearchValues={filteredSearchValues}
                 setIsModelOpen={setIsModelOpen}
                 setIsAddItem={setIsAddItem}
                 setSelectedItem={setSelectedItem}
-                setPickupDetails={setPickupDetails}
+                categoryRefs={categoryRefs}
               />
             </div>
           </div>
@@ -384,8 +473,8 @@ export default function OrderOnlinePage() {
             <RightSideOrderOnlinePage
               mode={mode}
               setMode={setMode}
-              pickupDetails={pickupDetails}
-              setPickupDetails={setPickupDetails}
+              isPickupModel={isPickupModel}
+              setIsPickupModel={setIsPickupModel}
               cartDetails={cartDetails}
               setCartDetails={setCartDetails}
               editItems={editItems}
@@ -626,49 +715,12 @@ export default function OrderOnlinePage() {
         </div>
       )}
       {/* Model for pickup details-date & time rightPart 2nd one  */}
-      {pickupDetails && (
-        <section className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-50  flex items-center justify-center">
-          <div className="relative h-[400px] w-[500px] bg-white rounded-2xl overflow-auto ">
-            <div className="border-b">
-              <h2 className="title font-semibold absolute top-6 left-8 text-[20px]">
-                Pickup Details
-              </h2>
-              <button
-                onClick={() => setPickupDetails(false)}
-                className="closeButton absolute top-6 right-6 cursor-pointer  "
-              >
-                <IoCloseOutline size={50} className=" text-gray-400 p-2" />
-              </button>
-            </div>
-            <hr className="flex-grow border-t-2  border-stone-200 mb-5 mt-[80px]" />
-            <div className="  px-[40px] mb-8">
-              <p className="p-2 mt-8 text-sm font-semibold">Pickup Time</p>
-              <DateDropdown
-                ref={dateSelectRef}
-                onChange={(val) =>
-                  setPickupInfo((prev) => ({ ...prev, date: val }))
-                }
-              />
-              <TimeDropdown
-                ref={timeSelectRef}
-                onChange={(val) =>
-                  setPickupInfo((prev) => ({ ...prev, time: val }))
-                }
-              />
-             
-            </div>
-            <hr className="flex-grow border-t-2  border-stone-200 mb-5" />
-            <div className="flex items-center justify-center">
-              <button
-                onClick={handleDateTime}
-                className="rounded-full bg-[#13AA6D] hover:bg-green-700 w-[80%]
-                      px-8 py-3 text-white cursor-pointer"
-              >
-                Update
-              </button>
-            </div>
-          </div>
-        </section>
+      {isPickupModel && (
+        <PickupModel
+          setIsPickupModel={setIsPickupModel}
+          pickupInfo={pickupInfo}
+          setPickupInfo={setPickupInfo}
+        />
       )}
 
       {isOutsideBusinessHours() && showAfterHours && (

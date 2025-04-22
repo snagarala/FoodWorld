@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { CiClock2 } from "react-icons/ci";
-import PickupDeliveryModal from "./PickupDeliveryModal";
+//import PickupDeliveryModal from "./PickupDeliveryModal";
 import DeliveryModel from "./DeliveryModel";
+import PickupModel from "./PickupModel";
+import { PiCalendarBlank } from "react-icons/pi";
 
 export default function RightSideOrderOnlinePage({
   mode,
   setMode,
-  pickupDetails,
-  setPickupDetails,
+  isPickupModel,
+  setIsPickupModel,
   cartDetails,
   setCartDetails,
   editItems,
@@ -16,19 +18,22 @@ export default function RightSideOrderOnlinePage({
   pickupInfo,
 }) {
   //pickup delivery logic
-  const [modalOpen, setModalOpen] = useState(false);
-  const [pickupInformation, setPickupInformation] = useState(null);
+  //const [modalOpen, setModalOpen] = useState(false);
+  //const [pickupInformation, setPickupInformation] = useState(null);
 
-  const handleUpdate = (data) => {
-    setPickupInformation(data);
-  };
+  //   const handleUpdate = (data) => {
+  //     setPickupInformation(data);
+  //   };
 
   const [isToggled, setIsToggled] = useState(true);
   const [isDeliveryModel, setIsDeliveryModel] = useState(false);
 
   return (
     <div className="">
-      <div className="w-full flex mt-[30px] mb-6 bg-[#F2F2F2] items-center rounded-full justify-between shadow-md relative transition-all duration-300">
+      <div
+        className="w-full flex mt-[30px] mb-6 bg-[#F2F2F2] items-center rounded-full justify-between
+         shadow-md relative transition-all duration-300"
+      >
         {/* Sliding background highlight */}
         <div
           className={`absolute top-0 left-0 h-full w-1/2 rounded-full bg-[#13AA6D] transition-transform duration-300
@@ -40,6 +45,7 @@ export default function RightSideOrderOnlinePage({
           onClick={() => {
             setMode("Pickup");
             setIsToggled(false);
+            setIsPickupModel(true);
           }}
           className={`w-1/2 z-10 py-4 text-center rounded-full transition-colors duration-300
          ${mode === "Pickup" ? "text-white" : "text-black"}`}
@@ -60,9 +66,10 @@ export default function RightSideOrderOnlinePage({
           Delivery
         </button>
       </div>
+
       {/* Time section */}
       <div
-        onClick={() => setPickupDetails(true)}
+        onClick={() => setIsPickupModel(true)}
         className="border border-zinc-300 hover:border-gray-950 cursor-pointer rounded-full w-full mb-4 py-3 
               text-center flex items-center justify-center gap-2"
       >
@@ -72,9 +79,12 @@ export default function RightSideOrderOnlinePage({
             <p className="text-center text-zinc-500 ">ASAP</p>
           </div>
         ) : (
-          <button className="text-center text-zinc-500 ">
-            {pickupInfo.date} {pickupInfo.time}
-          </button>
+          <div className="flex items-center">
+            <PiCalendarBlank size={20} className="text-zinc-500 mr-5" />
+            <button className="text-center text-zinc-500 text-sm">
+              {pickupInfo.date} {pickupInfo.time}
+            </button>
+          </div>
         )}
       </div>
       {/* Cart */}
@@ -154,7 +164,8 @@ export default function RightSideOrderOnlinePage({
           <DeliveryModel
             setIsDeliveryModel={setIsDeliveryModel}
             setIsToggled={setIsToggled}
-            setMode={setModalOpen}
+            setMode={setMode}
+            pickupInfo={pickupInfo}
           />
         )}
       </div>

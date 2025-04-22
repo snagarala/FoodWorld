@@ -25,11 +25,12 @@ import React from "react";
   return times;
 }
 
-export default function TimeDropdown({onChange}) {
+export default function TimeDropdown({onChange, label}) {
   const timeOptions = generateTimeOptions("10:00", "20:00");
 
   return (
     <div className="mt-5">
+      {label && <p className="text-sm font-semibold text-zinc-600 mb-2">{label}</p>}
       {/* <label className="block text-sm font-medium mb-2">Select a Pickup Time:</label> */}
       <select  onChange={(e) => onChange(e.target.value)}
         className="block w-full p-3 pr-10 border border-stone-300 rounded-md mt-2 shadow-sm text-stone-600 overflow-hidden

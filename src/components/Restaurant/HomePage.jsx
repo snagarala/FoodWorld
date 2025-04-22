@@ -90,7 +90,8 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex items-center text-start w-8 h-[450px] pr-[150px]">
-          <p className=" text-green-900 font-['libre_caslon_display'] font-bold text-[45px] p-2">
+          <p className=" text-green-900 font-['libre_caslon_display'] font-bold 
+           text-[45px] p-2">
             "Every plate is a masterpiece,fresh and flavorful"
           </p>
         </div>
