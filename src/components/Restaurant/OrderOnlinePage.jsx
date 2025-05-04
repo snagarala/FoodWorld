@@ -32,7 +32,9 @@ export default function OrderOnlinePage() {
   const [allMenuItems] = useState({ ...foodItems, ...kidsMenu });
   const [search, setSearch] = useState("");
 
-  const [filteredSearchValues, setFilteredSearchValues] = useState({});
+  const [filteredSearchValues, setFilteredSearchValues] =
+    useState(allMenuItems);
+  //console.log(filteredSearchValues,"filteredSearchValues");
 
   const [cartDetails, setCartDetails] = useCartDetails();
 
@@ -68,85 +70,101 @@ export default function OrderOnlinePage() {
     return useState([]);
   }
 
-  const setScrollToCategory = () => {
-    if (selectedCategory === "Categories") {
-      return filteredSearchValues;
-    }
-    return Object.entries(filteredSearchValues).reduce((acc, [category, items]) => {
-      if (category === selectedCategory) {
-        acc[category] = items;
-      }
-      return acc;
-    }, {});
-  };
+  // Category filtering is handled in the useEffect above
 
-  //to display category name when user scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries.find((entry) => entry.isIntersecting);
-        if (visibleEntry?.target) {
-          const category = visibleEntry.target.getAttribute("data-category");
-          if (category) setSelectedCategory(category);
-        }
-      },
-      {
-        rootMargin: "-50% 0px -50% 0px", // triggers when element is in middle-ish
-        threshold: 0,
-      }
-    );
+  // //to display category name when user scroll
+  // useEffect(() => {
+  //   // Observer for category sections
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       const visibleEntry = entries.find((entry) => entry.isIntersecting);
+  //       if (visibleEntry?.target) {
+  //         const category = visibleEntry.target.getAttribute("data-category");
+  //         if (category) setSelectedCategory(category);
+  //       }
+  //     },
+  //     {
+  //       rootMargin: "-50% 0px -50% 0px", // triggers when element is in middle-ish
+  //       threshold: 0,
+  //     }
+  //   );
 
-    Object.entries(categoryRefs.current).forEach(([category, element]) => {
-      if (element) {
-        element.setAttribute("data-category", category);
-        observer.observe(element);
-      }
-    });
+  //   // Observer for top of the page
+  //   const topObserver = new IntersectionObserver(
+  //     (entries) => {
+  //       if (entries[0].isIntersecting) {
+  //         setSelectedCategory("Categories");
+  //       }
+  //     },
+  //     {
+  //       threshold: 1, // Fully visible
+  //       rootMargin: "0px 0px -90% 0px", // Only trigger at very top
+  //     }
+  //   );
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [filteredSearchValues]);
+  //   // Observe all category sections
+  //   Object.entries(categoryRefs.current).forEach(([category, element]) => {
+  //     if (element) {
+  //       element.setAttribute("data-category", category);
+  //       observer.observe(element);
+  //     }
+  //   });
+
+  //   // Create and observe a dummy element at the top
+  //   const topElement = document.createElement("div");
+  //   topElement.style.height = "1px";
+  //   const container = document.querySelector(".itemsCard");
+  //   if (container && container.firstChild) {
+  //     container.insertBefore(topElement, container.firstChild);
+  //     topObserver.observe(topElement);
+  //   }
+
+  //   return () => {
+  //     observer.disconnect();
+  //     topObserver.disconnect();
+  //     topElement.remove();
+  //   };
+  // }, [filteredSearchValues]);
 
   //scroll Tracking Logic
-  useEffect(() => {
-    let ticking = false;
+  // useEffect(() => {
+  //   let ticking = false;
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY + 120;
+  //   const handleScroll = () => {
+  //     if (!ticking) {
+  //       window.requestAnimationFrame(() => {
+  //         const scrollY = window.scrollY + 120;
 
-          const categoryEntries = Object.entries(categoryRefs.current);
+  //         const categoryEntries = Object.entries(categoryRefs.current);
 
-          let currentCategory = selectedCategory;
+  //         let currentCategory = selectedCategory;
 
-          for (let i = 0; i < categoryEntries.length; i++) {
-            const [category, ref] = categoryEntries[i];
-            if (ref && ref.offsetTop <= scrollY) {
-              currentCategory = category;
-            }
-          }
+  //         for (let i = 0; i < categoryEntries.length; i++) {
+  //           const [category, ref] = categoryEntries[i];
+  //           if (ref && ref.offsetTop <= scrollY) {
+  //             currentCategory = category;
+  //           }
+  //         }
 
-          // Only update if it's not a click scroll and category actually changed
-          if (!isClickScroll.current && currentCategory !== selectedCategory) {
-            setSelectedCategory(currentCategory);
-          }
+  //         // Only update if it's not a click scroll and category actually changed
+  //         if (!isClickScroll.current && currentCategory !== selectedCategory) {
+  //           setSelectedCategory(currentCategory);
+  //         }
 
-          ticking = false;
-        });
+  //         ticking = false;
+  //       });
 
-        ticking = true;
-      }
-    };
+  //       ticking = true;
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [selectedCategory]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [selectedCategory]);
 
   useEffect(() => {
     let filtered = { ...allMenuItems };
-    
+
     // Apply search filter
     if (search.trim() !== "") {
       const searchLower = search.toLowerCase();
@@ -169,7 +187,7 @@ export default function OrderOnlinePage() {
     // Apply category filter if a specific category is selected
     if (selectedCategory !== "Categories") {
       filtered = {
-        [selectedCategory]: filtered[selectedCategory] || []
+        [selectedCategory]: filtered[selectedCategory] || [],
       };
     }
 
@@ -722,7 +740,7 @@ export default function OrderOnlinePage() {
           setPickupInfo={setPickupInfo}
         />
       )}
-
+      {/* Model for outside business hours */}
       {isOutsideBusinessHours() && showAfterHours && (
         <ModelAfterBussHours setShowAfterHours={setShowAfterHours} />
       )}

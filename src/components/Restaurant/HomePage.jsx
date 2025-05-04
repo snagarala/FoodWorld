@@ -47,7 +47,7 @@ export default function HomePage() {
             onClick={() => {
               navigate("/orderOnline");
             }}
-            className="mt-[60px] font-sans font-light "
+            className="mt-[60px] font-sans font-light"
           >
             Order Takeout
           </p>
@@ -90,8 +90,10 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex items-center text-start w-8 h-[450px] pr-[150px]">
-          <p className=" text-green-900 font-['libre_caslon_display'] font-bold 
-           text-[45px] p-2">
+          <p
+            className=" text-green-900 font-['libre_caslon_display'] font-bold 
+           text-[45px] p-2"
+          >
             "Every plate is a masterpiece,fresh and flavorful"
           </p>
         </div>
@@ -226,12 +228,12 @@ export default function HomePage() {
               <p className="text-green-900 mt-[25px] font-semibold text-[50px] font-['bentham']">
                 Follow Us
               </p>
-              <div className="flex mt-[20px]">
+              <div className="flex mt-[20px] ">
                 <FaSquareInstagram
                   size={60}
-                  className="text-pink-800 ml-[80px]"
+                  className="text-pink-800 ml-[80px] cursor-pointer"
                 />
-                <FaFacebook size={60} className="text-[#3D5999] ml-[20px]" />
+                <FaFacebook size={60} className="text-[#3D5999] ml-[20px] cursor-pointer" />
               </div>
             </div>
           </div>

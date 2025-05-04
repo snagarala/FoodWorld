@@ -42,8 +42,8 @@ export default function AboutPage() {
         </div>
 
         <div className="flex mt-[250px] justify-end pr-[40px]">
-          <FaInstagramSquare size={60} className="text-pink-800 ml-[80px]" />
-          <FaFacebook size={60} className="text-[#3D5999] ml-[20px]" />
+          <FaInstagramSquare size={60} className="text-pink-800 ml-[80px] cursor-pointer" />
+          <FaFacebook size={60} className="text-[#3D5999] ml-[20px] cursor-pointer" />
         </div>
       </div>
       <div className="mt-[150px] mx-5 mb-5">

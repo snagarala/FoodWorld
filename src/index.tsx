@@ -11,6 +11,7 @@ import AboutPage from "./components/Restaurant/AboutPage";
 import Catering from "./components/Restaurant/Catering";
 import OrderOnlinePage from "./components/Restaurant/OrderOnlinePage";
 import LoginSignUpPage from "./components/Restaurant/LoginSignUpPage";
+import ModelAfterBussHours from "./components/Restaurant/ModelAfterBussHours";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -37,8 +38,8 @@ const router = createBrowserRouter([
     element: <OrderOnlinePage />,
   },
   {
-    path:"/loginPage",
-    element:<LoginSignUpPage/>,
+    path: "/loginPage",
+    element: <LoginSignUpPage />,
   },
 ]);
 

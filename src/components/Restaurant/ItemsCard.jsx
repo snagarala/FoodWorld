@@ -12,13 +12,8 @@ export default function ItemsCard({
   return (
     <div className="itemsCard">
       <div>
-        {Object.entries(filteredSearchValues)
-          // .filter(([category]) =>
-          //   selectedCategory === "Categories" || selectedCategory === ""
-          //     ? true
-          //     : category === selectedCategory
-          // )
-          .map(([category, items]) => (
+        {Object.entries(filteredSearchValues).map(
+          ([category, items], index) => (
             <div
               key={category}
               //Attaching Ref for scrolling track
@@ -52,7 +47,8 @@ export default function ItemsCard({
                 </div>
               ))}
             </div>
-          ))}
+          )
+        )}
       </div>
     </div>
   );
