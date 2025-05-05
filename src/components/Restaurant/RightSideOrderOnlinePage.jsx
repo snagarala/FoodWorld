@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { CiClock2 } from "react-icons/ci";
 //import PickupDeliveryModal from "./PickupDeliveryModal";
-import DeliveryModel from "./DeliveryModel";
-import PickupModel from "./PickupModel";
+// import DeliveryModel from "./DeliveryModel";
+// import PickupModel from "./PickupModel";
 import { PiCalendarBlank } from "react-icons/pi";
 
 export default function RightSideOrderOnlinePage({
@@ -26,7 +26,7 @@ export default function RightSideOrderOnlinePage({
   //   };
 
   const [isToggled, setIsToggled] = useState(true);
-  const [isDeliveryModel, setIsDeliveryModel] = useState(false);
+  // const [isDeliveryModel, setIsDeliveryModel] = useState(false);
 
   return (
     <div className="">
@@ -58,7 +58,7 @@ export default function RightSideOrderOnlinePage({
           onClick={() => {
             setMode("Delivery");
             setIsToggled(true);
-            setIsDeliveryModel(true);
+            setIsPickupModel(true);
           }}
           className={`w-1/2 z-10 py-4 text-center rounded-full transition-colors duration-300
            ${mode === "Delivery" ? "text-white" : "text-black"}`}
@@ -159,7 +159,7 @@ export default function RightSideOrderOnlinePage({
         </div>
       </div>
       {/* Delivery Model(popup) */}
-      <div>
+      {/* <div>
         {isDeliveryModel && (
           <DeliveryModel
             setIsDeliveryModel={setIsDeliveryModel}
@@ -168,7 +168,7 @@ export default function RightSideOrderOnlinePage({
             pickupInfo={pickupInfo}
           />
         )}
-      </div>
+      </div> */}
 
       {/* Pickup and Delivery */}
       {/* <div className="w-full rounded-2xl border border-zinc-300 mt-5">

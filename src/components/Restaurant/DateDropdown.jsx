@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function DateDropdown({ onChange,label }) {
+export default function DateDropdown({ onChange, label, pickupInfo }) {
   const [dateOptions, setDateOptions] = useState([]);
 
   useEffect(() => {
@@ -23,8 +23,11 @@ export default function DateDropdown({ onChange,label }) {
 
   return (
     <div>
-      {label && <p className="text-sm font-semibold text-zinc-600 mb-2">{label}</p>}
+      {label && (
+        <p className="text-sm font-semibold text-zinc-600 mb-2">{label}</p>
+      )}
       <select
+        value={pickupInfo.date}
         onChange={(e) => onChange(e.target.value)}
         className="block w-full p-3 pr-10 border border-stone-300 rounded-md mt-2 shadow-sm text-stone-600
                  focus:outline-none focus:ring-1 focus:ring-stone-500 hover:ring-stone-400 hover:ring-2 cursor-pointer"

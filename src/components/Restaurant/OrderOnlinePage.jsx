@@ -59,8 +59,9 @@ export default function OrderOnlinePage() {
   const [pickupInfo, setPickupInfo] = useState({
     date: null,
     time: null,
-    address1: null,
-    address2: null,
+    address: null,
+    apt: null,
+    SlLocationPin: null,
     delivery_notes: null,
   });
 
@@ -735,6 +736,7 @@ export default function OrderOnlinePage() {
       {/* Model for pickup details-date & time rightPart 2nd one  */}
       {isPickupModel && (
         <PickupModel
+          mode={mode}
           setIsPickupModel={setIsPickupModel}
           pickupInfo={pickupInfo}
           setPickupInfo={setPickupInfo}
