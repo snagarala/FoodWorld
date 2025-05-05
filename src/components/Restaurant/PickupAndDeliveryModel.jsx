@@ -4,7 +4,7 @@ import DateDropdown from "./DateDropdown";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlLocationPin } from "react-icons/sl";
 
-export default function PickupModel({
+export default function PickupAndDeliveryModel({
   mode,
   pickupInfo,
   setPickupInfo,

@@ -16,7 +16,7 @@ import { GiKnifeFork } from "react-icons/gi";
 import RightSideOrderOnlinePage from "./RightSideOrderOnlinePage";
 import FooterOrderOnline from "./FooterOrderOnline";
 import ModelAfterBussHours from "./ModelAfterBussHours";
-import PickupModel from "./PickupModel";
+import PickupAndDeliveryModel from "./PickupAndDeliveryModel";
 
 export default function OrderOnlinePage() {
   const [open, setOpen] = useState(false); //categoryDropDown
@@ -735,7 +735,7 @@ export default function OrderOnlinePage() {
       )}
       {/* Model for pickup details-date & time rightPart 2nd one  */}
       {isPickupModel && (
-        <PickupModel
+        <PickupAndDeliveryModel
           mode={mode}
           setIsPickupModel={setIsPickupModel}
           pickupInfo={pickupInfo}

@@ -1,32 +1,18 @@
 import React, { useState } from "react";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { CiClock2 } from "react-icons/ci";
-//import PickupDeliveryModal from "./PickupDeliveryModal";
-// import DeliveryModel from "./DeliveryModel";
-// import PickupModel from "./PickupModel";
 import { PiCalendarBlank } from "react-icons/pi";
 
 export default function RightSideOrderOnlinePage({
   mode,
   setMode,
-  isPickupModel,
   setIsPickupModel,
   cartDetails,
-  setCartDetails,
   editItems,
   deleteItems,
   pickupInfo,
 }) {
-  //pickup delivery logic
-  //const [modalOpen, setModalOpen] = useState(false);
-  //const [pickupInformation, setPickupInformation] = useState(null);
-
-  //   const handleUpdate = (data) => {
-  //     setPickupInformation(data);
-  //   };
-
   const [isToggled, setIsToggled] = useState(true);
-  // const [isDeliveryModel, setIsDeliveryModel] = useState(false);
 
   return (
     <div className="">
@@ -158,52 +144,6 @@ export default function RightSideOrderOnlinePage({
           )}
         </div>
       </div>
-      {/* Delivery Model(popup) */}
-      {/* <div>
-        {isDeliveryModel && (
-          <DeliveryModel
-            setIsDeliveryModel={setIsDeliveryModel}
-            setIsToggled={setIsToggled}
-            setMode={setMode}
-            pickupInfo={pickupInfo}
-          />
-        )}
-      </div> */}
-
-      {/* Pickup and Delivery */}
-      {/* <div className="w-full rounded-2xl border border-zinc-300 mt-5">
-        <div
-          className="min-h-[300px] flex flex-col items-center rounded-2xl 
-              justify-center bg-gray-100 p-6"
-        >
-          <button
-            onClick={() => setModalOpen(true)}
-            className="bg-green-600 text-white px-6 py-3 rounded-full"
-          >
-            Choose Pickup/Delivery Time
-          </button>
-
-          {pickupInformation && (
-            <div className="mt-4 p-4 bg-white rounded shadow-md text-sm">
-              <p>
-                <strong>Mode:</strong> {pickupInformation.mode}
-              </p>
-              <p>
-                <strong>Date:</strong> {pickupInformation.selectedDate}
-              </p>
-              <p>
-                <strong>Time:</strong> {pickupInformation.selectedTime}
-              </p>
-            </div>
-          )}
-
-          <PickupDeliveryModal
-            isOpen={modalOpen}
-            onClose={() => setModalOpen(false)}
-            onUpdate={handleUpdate}
-          />
-        </div>
-      </div> */}
     </div>
   );
 }

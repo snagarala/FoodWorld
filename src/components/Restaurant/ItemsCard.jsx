@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 export default function ItemsCard({
-  selectedCategory,
   filteredSearchValues,
   setIsModelOpen,
   setIsAddItem,
